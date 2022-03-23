@@ -1,4 +1,4 @@
-package h10.server.models;
+package h10.server.components;
 
 import h10.protocol.packets.ProtocolDataUnit;
 import h10.protocol.subunits.AlarmEntry;
@@ -7,6 +7,7 @@ import h10.protocol.subunits.TestingType;
 import h10.protocol.subunits.WorkingMode;
 import h10.server.dto.LimitSettings;
 import h10.server.dto.VoiceStatus;
+import h10.server.models.Voice;
 import h10.server.rules.DeviceEvents;
 import h10.server.rules.Observe;
 import h10.server.rules.SmartDevice;
@@ -160,6 +161,11 @@ public class Device implements SmartDevice {
     @Override
     public String getImei() {
         return imei;
+    }
+
+    @Override
+    public void setImei(String value) {
+        imei = value;
     }
 
     public String getRemoteIp() {

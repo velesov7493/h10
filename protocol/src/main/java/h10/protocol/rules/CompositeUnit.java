@@ -8,6 +8,7 @@ import java.util.StringJoiner;
 public interface CompositeUnit extends Parseable {
 
     int getSize();
+
     SimpleUnit getUnit(int index);
 
     static void parseAll(List<? extends Parseable> units, String splitter, String packet) {
@@ -40,8 +41,8 @@ public interface CompositeUnit extends Parseable {
         int[] lengths = cu.getLengths();
         if (lengths == null) {
             throw new IllegalStateException(
-                "Для разбора этого модуля длины компонентов не используются! " +
-                "Используйте parseAllBySplitter()"
+                "Для разбора этого модуля длины компонентов не используются! "
+                + "Используйте parseAllBySplitter()"
             );
         }
         if (lengths.length != cu.getSize()) {
@@ -82,13 +83,20 @@ public interface CompositeUnit extends Parseable {
         return result;
     }
 
-    static <T extends Parseable> List<T> readUnits(CompositeUnit cu, int offset, int count, Class<T> unitClazz) {
+    static <T extends Parseable> List<T> readUnits(
+            CompositeUnit cu,
+            int offset, int count,
+            Class<T> unitClazz
+    ) {
         int l = offset + count;
         if (l > cu.getSize()) {
-            throw new IndexOutOfBoundsException("Максимальный индекс элемента: " + (cu.getSize() - 1) + ", а последний запрашиваемый: " + (l - 1));
+            throw new IndexOutOfBoundsException(
+                    "Максимальный индекс элемента: " + (cu.getSize() - 1)
+                    + ", а последний запрашиваемый: " + (l - 1)
+            );
         }
         List<T> result = new ArrayList<>();
-        Constructor<T> c = null;
+        Constructor<T> c;
         try {
             c = unitClazz.getDeclaredConstructor();
             for (int i = offset; i < l; i++) {
@@ -109,7 +117,10 @@ public interface CompositeUnit extends Parseable {
     static <T extends Parseable> void writeUnits(List<T> src, CompositeUnit dest, int offset) {
         int l = offset + src.size();
         if (l > dest.getSize()) {
-            throw new IndexOutOfBoundsException("Максимальный индекс элемента: " + (dest.getSize() - 1) + ", а последний запрашиваемый: " + (l - 1));
+            throw new IndexOutOfBoundsException(
+                    "Максимальный индекс элемента: " + (dest.getSize() - 1)
+                    + ", а последний запрашиваемый: " + (l - 1)
+            );
         }
         for (int i = 0; i < src.size(); i++) {
             dest.getUnit(offset + i).setString(src.get(i).toPacket());

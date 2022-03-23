@@ -7,12 +7,15 @@ import h10.protocol.subunits.VoiceEntry;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 
 public class Voice {
 
     private int id;
     private String imei;
+    private String senderName;
+    private int journalNo;
     private int duration;
     private LocalDateTime dateTime;
     private byte[] data;
@@ -37,7 +40,7 @@ public class Voice {
         return result;
     }
 
-    public List<BP28> toOutcomeSequence(String senderName, int journalNo) {
+    private List<BP28> toOutcomeSequence() {
         List<BP28> result = new ArrayList<>();
         int count = packetsCount(data.length);
         int position = 0;
@@ -56,6 +59,10 @@ public class Voice {
             size = Math.min(1024, data.length - position);
         }
         return result;
+    }
+
+    public Iterator<BP28> outVoiceIterator() {
+        return toOutcomeSequence().iterator();
     }
 
     public VoiceEntry toEntry() {
@@ -80,6 +87,22 @@ public class Voice {
 
     public void setImei(String imei) {
         this.imei = imei;
+    }
+
+    public String getSenderName() {
+        return senderName;
+    }
+
+    public void setSenderName(String senderName) {
+        this.senderName = senderName;
+    }
+
+    public int getJournalNo() {
+        return journalNo;
+    }
+
+    public void setJournalNo(int journalNo) {
+        this.journalNo = journalNo;
     }
 
     public int getDuration() {

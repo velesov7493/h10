@@ -98,6 +98,10 @@ public class DeviceStatus implements Parseable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(gsmSignalLevel, gsmSattellitesCount, batteryLevel, fortificationState, workingMode);
+        return
+                Objects.hash(
+                    gsmSignalLevel, gsmSattellitesCount,
+                    batteryLevel, fortificationState, workingMode
+                );
     }
 }

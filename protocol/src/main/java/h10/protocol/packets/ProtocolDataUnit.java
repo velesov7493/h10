@@ -66,7 +66,9 @@ public class ProtocolDataUnit implements Parseable {
         commandId = packet.substring(2, 6);
         int shift = ',' == packet.charAt(6) ? 1 : 0;
         if (haveContent) {
-            if (content == null) { createContentByCommandId(); }
+            if (content == null) {
+                createContentByCommandId();
+            }
             content.parse(packet.substring(6 + shift, packet.length() - 1));
         }
     }

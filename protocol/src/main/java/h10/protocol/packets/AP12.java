@@ -42,7 +42,9 @@ public class AP12 extends DefaultJournalable {
 
     public void setSosPhones(List<String> value) {
         if (value.size() > 3) {
-            throw new IllegalArgumentException("Можно установить не больше трех экстренных номеров!");
+            throw new IllegalArgumentException(
+                "Можно установить не больше трех экстренных номеров!"
+            );
         }
         phones = value;
     }

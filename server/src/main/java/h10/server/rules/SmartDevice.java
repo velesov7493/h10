@@ -16,6 +16,8 @@ public interface SmartDevice {
 
     String getImei();
 
+    void setImei(String value);
+
     String getHumanReadableAddress();
 
     void setHumanReadableAddress(String value);

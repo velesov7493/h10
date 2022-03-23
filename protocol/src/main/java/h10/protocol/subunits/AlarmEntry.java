@@ -18,7 +18,7 @@ public class AlarmEntry implements Parseable {
 
     @Override
     public void parse(String packet) {
-        StringCompositeUnit scu = new StringCompositeUnit(",",4, false);
+        StringCompositeUnit scu = new StringCompositeUnit(",", 4, false);
         scu.parse(packet);
         time = scu.getUnit(0).getAsTime("HHmm");
         daysOfWeek = scu.getUnit(1).getAsIntArray();
@@ -28,7 +28,7 @@ public class AlarmEntry implements Parseable {
 
     @Override
     public String toPacket() {
-        StringCompositeUnit scu = new StringCompositeUnit(",",4, false);
+        StringCompositeUnit scu = new StringCompositeUnit(",", 4, false);
         scu.getUnit(0).setTime(time, "HHmm");
         scu.getUnit(1).setIntArray(daysOfWeek);
         scu.getUnit(2).setBoolean(enabled);

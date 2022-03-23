@@ -63,7 +63,7 @@ public class StringSimpleUnit implements SimpleUnit {
     @Override
     public void setInteger(int val, int width) {
         String w = width == 0 ? "" : String.valueOf(width);
-        String result = String.format("%"+ w +"d", val);
+        String result = String.format("%" + w + "d", val);
         value = result.replaceAll(" ", "0");
     }
 
@@ -163,8 +163,12 @@ public class StringSimpleUnit implements SimpleUnit {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         StringSimpleUnit that = (StringSimpleUnit) o;
         return Objects.equals(value, that.value);
     }

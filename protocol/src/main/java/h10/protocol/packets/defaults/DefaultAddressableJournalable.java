@@ -6,7 +6,9 @@ import h10.protocol.rules.*;
 
 import java.util.List;
 
-public class DefaultAddressableJournalable extends DefaultAddressable implements Parseable, Addressable, Journalable {
+public class DefaultAddressableJournalable
+    extends DefaultAddressable
+    implements Parseable, Addressable, Journalable {
 
     private int journalNo;
 

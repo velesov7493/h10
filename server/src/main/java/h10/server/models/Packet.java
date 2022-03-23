@@ -17,12 +17,11 @@ public class Packet {
     private Integer sequenceNo;
     private Integer totalPackets;
     private String data;
-    private byte[] voice;
 
     public Packet(ProtocolDataUnit source) {
         command = source.getCommandId();
         data = source.toPacket();
-        Class clazz = source.getContent().getClass();
+        Class<?> clazz = source.getContent().getClass();
         if (clazz.isAssignableFrom(Addressable.class)) {
             Addressable content = source.getContent();
             imei = content.getImei();
@@ -35,10 +34,6 @@ public class Packet {
             Sequenced content = source.getContent();
             sequenceNo = content.getNumber();
             totalPackets = content.getTotalPackets();
-        }
-        if (clazz.isAssignableFrom(VoiceData.class)) {
-            VoiceData content = source.getContent();
-            voice = content.getAudio();
         }
     }
 
@@ -99,11 +94,15 @@ public class Packet {
     }
 
     public byte[] getVoice() {
+        byte[] voice = null;
+        ProtocolDataUnit pdu = new ProtocolDataUnit();
+        pdu.parse(data);
+        Class<?> clazz = pdu.getContent().getClass();
+        if (clazz.isAssignableFrom(VoiceData.class)) {
+            VoiceData content = pdu.getContent();
+            voice = content.getAudio();
+        }
         return voice;
-    }
-
-    public void setVoice(byte[] voice) {
-        this.voice = voice;
     }
 
     @Override

@@ -1,7 +1,7 @@
 package h10.server.stores;
 
 import h10.server.models.Journal;
-import h10.server.rules.Store;
+import h10.server.stores.rules.Store;
 
 import java.util.List;
 

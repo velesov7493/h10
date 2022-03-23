@@ -41,8 +41,8 @@ public class AP01 implements Parseable {
     @Override
     public String toPacket() {
         return
-                gps.toPacket() + "," + lbs.toPacket() +
-                "," + CompositeUnit.packAllUnits(wifi, "&");
+                gps.toPacket() + "," + lbs.toPacket()
+                + "," + CompositeUnit.packAllUnits(wifi, "&");
     }
 
     public boolean gpsIsZeroCoordinates() {
