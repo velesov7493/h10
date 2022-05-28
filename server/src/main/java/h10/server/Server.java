@@ -1,6 +1,8 @@
 package h10.server;
 
+import h10.server.configs.DefaultNodeConfig;
 import h10.server.rules.Node;
+import h10.server.rules.NodeConfig;
 import h10.server.rules.Observe;
 import h10.server.rules.SmartDevice;
 
@@ -12,54 +14,20 @@ import h10.server.rules.SmartDevice;
  */
 public class Server extends Thread implements Node {
 
-    @Override
-    public int getServerPort() {
-        return 0;
+    private NodeConfig config;
+
+    public Server() {
+        config = DefaultNodeConfig.getInstance();
     }
 
     @Override
-    public void setServerPort(int value) {
-
+    public NodeConfig getConfig() {
+        return config;
     }
 
     @Override
-    public String getServerHost() {
-        return null;
-    }
-
-    @Override
-    public void setServerHost(String value) {
-
-    }
-
-    @Override
-    public long getWaitConnectTimeout() {
-        return 0;
-    }
-
-    @Override
-    public void setWaitConnectTimeout(long milliseconds) {
-
-    }
-
-    @Override
-    public long getWaitResponseTimeout() {
-        return 0;
-    }
-
-    @Override
-    public void setWaitResponseTimeout(long milliseconds) {
-
-    }
-
-    @Override
-    public long getKeepAliveTimeout() {
-        return 0;
-    }
-
-    @Override
-    public void setKeepAliveTimeout(long milliseconds) {
-
+    public void setConfig(NodeConfig value) {
+        config = value;
     }
 
     @Override
